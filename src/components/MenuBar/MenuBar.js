@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import logo from "../../logo.svg";
 import './MenuBar.css'
@@ -12,10 +12,10 @@ const MenuBar= () => {
                 <img src={logo} alt="Logo comes here" />
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/'>Home</Link>
+                <NavLink exact={true} className="nav-link" to='/'>Home</NavLink>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/add'>add</Link>
+                <NavLink className="nav-link" to='/add'>add</NavLink>
             </li>
         </ul>
     </nav>);

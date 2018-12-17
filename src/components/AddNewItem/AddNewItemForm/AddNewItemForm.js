@@ -9,8 +9,8 @@ class AddNewItemForm extends Component{
     state={
         placeHolder: {
         "name": "Any name",
-        "SAP_Id": "5177210",
-        "email_Id": "mail@mail.com",
+        "sap_id": "5177210",
+        "email": "mail@mail.com",
         "system_number": "RW-04-2B-W-XXX"
         }
     }
@@ -26,13 +26,13 @@ class AddNewItemForm extends Component{
             }
             case "sap":{
                 const placeholder=this.state.placeHolder;
-                placeholder["SAP_Id"]=event.target.value;
+                placeholder["sap_id"]=event.target.value;
                 this.setState({placeHolder: placeholder})
                 break;
             }
             case "email":{
                 const placeholder=this.state.placeHolder;
-                placeholder["email_Id"]=event.target.value;
+                placeholder["email"]=event.target.value;
                 this.setState({placeHolder: placeholder})
                 break;
             }
@@ -55,6 +55,7 @@ class AddNewItemForm extends Component{
         this.props.addRecord(this.state.placeHolder);
         this.props.history.push('/');
     }
+
     render(){
         return(
             this.props.toggleRecordFormProp?
@@ -67,7 +68,7 @@ class AddNewItemForm extends Component{
                             className="col-12 col-lg-6 col-md-6 col-sm-12 form-control d-inline-block" 
                             type="text" 
                             htmlFor="name"
-                            value={this.props.placeHolderProp.name}
+                            value={this.state.placeHolder.name}
                             onChange={this.inputChangeHandler}/>
                     </div>
                     <div className="form-group">
@@ -76,7 +77,7 @@ class AddNewItemForm extends Component{
                             className="col-12 col-lg-6 col-md-6 col-sm-12 form-control d-inline-block" 
                             type="text" 
                             htmlFor="sap"
-                            value={this.props.placeHolderProp.SAP_Id}
+                            value={this.state.placeHolder.sap_id}
                             onChange={this.inputChangeHandler}/>
                     </div>
                     <div className="form-group">
@@ -85,7 +86,7 @@ class AddNewItemForm extends Component{
                             className="col-12 col-lg-6 col-md-6 col-sm-12 form-control d-inline-block" 
                             type="email" 
                             htmlFor="email"
-                            value={this.props.placeHolderProp.email_Id}
+                            value={this.state.placeHolder.email}
                             onChange={this.inputChangeHandler}/>
                     </div>
                     <div className="form-group">
@@ -94,7 +95,7 @@ class AddNewItemForm extends Component{
                             className="col-12 col-lg-6 col-md-6 col-sm-12 form-control d-inline-block" 
                             type="text" 
                             htmlFor="system"
-                            value={this.props.placeHolderProp.system_number}
+                            value={this.state.placeHolder.system_number}
                             onChange={this.inputChangeHandler}/>
                     </div>
                     <div className="form-group">

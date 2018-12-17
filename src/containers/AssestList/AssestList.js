@@ -1,9 +1,23 @@
 import React, {Component} from 'react';
+import axios from "axios";
+import { connect } from "react-redux";
 
 import './AssestList.css';
+import { retriveRecords, retriveSingleRecord } from '../../redux/actions/actions';
 
 class AssestList extends Component{
     
+    componentDidMount(){
+        axios.get("http://localhost:9090/assest").then((payload)=>{
+            this.props.retriveData(payload.data);
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+
+    onSelectingRecord(selectedElement){
+        this.props.detailedRecord(selectedElement);
+    }
 
     render(){
         return (
@@ -18,10 +32,10 @@ class AssestList extends Component{
                 </thead>
                 <tbody>
                     {this.props.assestLists.map((person,key )=>{
-                        return (<tr key={key}>
+                        return (<tr onClick={()=>this.onSelectingRecord(person._id)} key={person._id}>
                                 <td> {person.name} </td>
-                                <td> {person.SAP_Id} </td>
-                                <td> {person.email_Id} </td>
+                                <td> {person.sap_id} </td>
+                                <td> {person.email} </td>
                                 <td> {person.system_number} </td>
                             </tr>)
                     })}
@@ -31,4 +45,21 @@ class AssestList extends Component{
         );
     }
 }
-export default AssestList;
+
+const mapStateToProps = (state) => {
+    return{
+        assestLists: state.assestLists
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        retriveData: (records) =>{
+            return dispatch(retriveRecords(records));
+        },
+        detailedRecord: (recordId) =>{
+            return dispatch(retriveSingleRecord(recordId));
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AssestList);

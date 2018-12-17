@@ -1,42 +1,47 @@
 import * as actionTypes from "../constants/action-types";
+import  axios from "axios";
 
 const initialStore={
-    assestLists: [{
-        "name": "Loganathan",
-        "SAP_Id": "51772050",
-        "email_Id": "vijaydce2020@gmail.com",
-        "system_number": "RW-04-2B-W-072"
-      },
-      {
-        "name": "Prabhakaran",
-        "SAP_Id": "5164350",
-        "email_Id": "prabha@gmail.com",
-        "system_number": "RW-04-2B-W-071"
-      },
-      {
-        "name": "Prabhakaran",
-        "SAP_Id": "5164350",
-        "email_Id": "prabha@gmail.com",
-        "system_number": "RW-04-2B-W-071"
-      }],
+    assestLists: [],
       toggleRecordForm : true,
       placeHolder: {
           "name": "Your name",
           "SAP_Id": "5177210",
           "email_Id": "mail@mail.com",
           "system_number": "RW-04-2B-W-XXX"
-      }
+      },
+      selectedRecord: null
 }
 
 
 const rootReducer = (state=initialStore, action) => {
     switch(action.type){
         case actionTypes.ADD_RECORD:{
-            const copyAssestList = [...state.assestLists];
-            copyAssestList.push(action.payload);
+            axios.post("http://localhost:9090/assest",action.payload).then((payload)=>{
+                const copyAssestList = [...state.assestLists];
+                copyAssestList.push(action.payload);
+                return{
+                    ...state,
+                    assestLists: [...copyAssestList]
+                }
+            }).catch((err)=>{
+                return state;
+            });
+            return state;
+        }
+        case actionTypes.RETRIVE_RECORDS:{
             return{
                 ...state,
-                assestLists: [...copyAssestList]
+                assestLists: [...action.payload]
+            }
+        }
+        case actionTypes.RETRIVE_SINGLE_RECORD: {
+            const tempSelectedRecord = state.assestLists.filter((el)=>{
+                return el._id===action.payload;
+            });
+            return {
+                ...state,
+                selectedRecord: tempSelectedRecord[0]
             }
         }
         default:

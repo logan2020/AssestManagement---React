@@ -5,3 +5,6 @@ nav[data-component="menu-bar"] ul li.nav-item a.nav-link{
 nav[data-component="menu-bar"] li img{
     width: 50px;
 }
+nav[data-component="menu-bar"] ul li.nav-item a.nav-link.active{
+    color: red;
+}
