@@ -1,0 +1,7 @@
+nav[data-component="menu-bar"] ul li.nav-item a.nav-link{
+    color: white;
+    font-weight: 700;
+}
+nav[data-component="menu-bar"] li img{
+    width: 50px;
+}
