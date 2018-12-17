@@ -57,7 +57,7 @@ class AddNewItemForm extends Component{
     }
     render(){
         return(
-            this.props.visibilityState?
+            this.props.toggleRecordFormProp?
             <div data-component="AddNewItemForm" className="formHolder container">
                 <h3>Enter Your details Below</h3>
                 <form onSubmit={this.formSubmitHandler}>
@@ -67,7 +67,7 @@ class AddNewItemForm extends Component{
                             className="col-12 col-lg-6 col-md-6 col-sm-12 form-control d-inline-block" 
                             type="text" 
                             htmlFor="name"
-                            value={this.state.placeHolder.name}
+                            value={this.props.placeHolderProp.name}
                             onChange={this.inputChangeHandler}/>
                     </div>
                     <div className="form-group">
@@ -76,7 +76,7 @@ class AddNewItemForm extends Component{
                             className="col-12 col-lg-6 col-md-6 col-sm-12 form-control d-inline-block" 
                             type="text" 
                             htmlFor="sap"
-                            value={this.state.placeHolder.SAP_Id}
+                            value={this.props.placeHolderProp.SAP_Id}
                             onChange={this.inputChangeHandler}/>
                     </div>
                     <div className="form-group">
@@ -85,7 +85,7 @@ class AddNewItemForm extends Component{
                             className="col-12 col-lg-6 col-md-6 col-sm-12 form-control d-inline-block" 
                             type="email" 
                             htmlFor="email"
-                            value={this.state.placeHolder.email_Id}
+                            value={this.props.placeHolderProp.email_Id}
                             onChange={this.inputChangeHandler}/>
                     </div>
                     <div className="form-group">
@@ -94,7 +94,7 @@ class AddNewItemForm extends Component{
                             className="col-12 col-lg-6 col-md-6 col-sm-12 form-control d-inline-block" 
                             type="text" 
                             htmlFor="system"
-                            value={this.state.placeHolder.system_number}
+                            value={this.props.placeHolderProp.system_number}
                             onChange={this.inputChangeHandler}/>
                     </div>
                     <div className="form-group">
@@ -109,6 +109,13 @@ class AddNewItemForm extends Component{
     }
 }
 
+const mapStateToProps = (state) =>{
+    return{
+        toggleRecordFormProp: state.toggleRecordForm,
+        placeHolderProp: state.placeHolder
+    }
+}
+
 const mapDispatchToProps = (dispatch) =>{
     return{
         addRecord: (record) => {
@@ -117,4 +124,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(null, mapDispatchToProps)(AddNewItemForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewItemForm);

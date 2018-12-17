@@ -22,12 +22,7 @@ class Layout extends Component{
                                 assestLists={this.props.assestLists}/>
                         )}
                         exact />
-                    <Route path="/add" 
-                        render={(props) => (
-                            <AddNewItemForm {...props} 
-                                visibilityState={this.props.toggleRecordForm}
-                                placeHolderValue={this.props.placeHolder}/>
-                        )}/>
+                    <Route path="/add" component={AddNewItemForm}/>
                 </main>
                 <footer>
                     {/* just to click icon and change route */}
@@ -40,9 +35,7 @@ class Layout extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        assestLists: state.assestLists,
-        toggleRecordForm: state.toggleRecordForm,
-        placeHolder: state.placeHolder
+        assestLists: state.assestLists
     }
 }
 
