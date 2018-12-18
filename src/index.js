@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import thunk from 'redux-thunk';
 
 import rootReducer from "../src/redux/reducers/reducer";
 import './index.css';
@@ -19,7 +20,7 @@ const logger = (store) => {
     }
 }
 
-const store = createStore(rootReducer, applyMiddleware(logger));
+const store = createStore(rootReducer, applyMiddleware(logger,thunk));
 window.store= store;
 ReactDOM.render(
     <Provider store={store}>

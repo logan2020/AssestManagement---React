@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-import { addRecord } from "../../../redux/actions/actions";
+import { postAddRecordRequest } from "../../../redux/actions/actions";
 import './AddNewItemForm.css';
 
 class AddNewItemForm extends Component{
@@ -52,13 +53,19 @@ class AddNewItemForm extends Component{
     // form submit
     formSubmitHandler = (event) => {
         event.preventDefault();
-        this.props.addRecord(this.state.placeHolder);
-        this.props.history.push('/');
+        this.props.postAddRecordRequest(this.state.placeHolder);
+        // this.props.history.push('/');
+    }
+
+    componentWillUpdate(){
+        console.log("update");
     }
 
     render(){
+        let redirect = null;
+        if(this.props.addRecordSuccessfull)
+            redirect= <Redirect to="/"/>;
         return(
-            this.props.toggleRecordFormProp?
             <div data-component="AddNewItemForm" className="formHolder container">
                 <h3>Enter Your details Below</h3>
                 <form onSubmit={this.formSubmitHandler}>
@@ -105,22 +112,24 @@ class AddNewItemForm extends Component{
                             value="submit"/>
                     </div>
                 </form>
-            </div>:null
+                {redirect}
+            </div>
+            
         );
     }
 }
 
 const mapStateToProps = (state) =>{
     return{
-        toggleRecordFormProp: state.toggleRecordForm,
-        placeHolderProp: state.placeHolder
+        placeHolderProp: state.placeHolder,
+        addRecordSuccessfull: state.addRecordSuccessfull
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        addRecord: (record) => {
-            return dispatch(addRecord(record));
+        postAddRecordRequest: (record) => {
+            return dispatch(postAddRecordRequest(record));
         }
     }
 }

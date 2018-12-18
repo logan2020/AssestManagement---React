@@ -15,6 +15,12 @@ class AssestList extends Component{
         })
     }
 
+    componentDidUpdate(){
+        if(this.props.reloadHomeRoute){
+            // this.props.history.push("/");
+        }
+    }
+
     onSelectingRecord(selectedElement){
         this.props.detailedRecord(selectedElement);
     }
@@ -48,7 +54,8 @@ class AssestList extends Component{
 
 const mapStateToProps = (state) => {
     return{
-        assestLists: state.assestLists
+        assestLists: state.assestLists,
+        reloadHomeRoute: state.reloadHomeRoute
     }
 }
 

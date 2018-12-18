@@ -8,6 +8,7 @@ import MenuBar from "../MenuBar/MenuBar";
 import AddNewItem from '../../components/AddNewItem/AddNewItem'
 import AssestList from '../../containers/AssestList/AssestList'
 import  AddNewItemForm from '../AddNewItem/AddNewItemForm/AddNewItemForm'
+import DetailedDisplay from "../DetailedDisplay/DetailedDisplay";
 
 class Layout extends Component{
 
@@ -18,8 +19,11 @@ class Layout extends Component{
                 <main className="container">
                     <Route path="/" 
                         render={(props) => (
-                            <AssestList {...props} 
-                                assestLists={this.props.assestLists}/>
+                            <React.Fragment>
+                                <AssestList {...props} 
+                                    assestLists={this.props.assestLists}/>
+                                <DetailedDisplay/>
+                            </React.Fragment>
                         )}
                         exact />
                     <Route path="/add" component={AddNewItemForm}/>
