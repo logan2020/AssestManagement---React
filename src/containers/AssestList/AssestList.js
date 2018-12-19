@@ -1,24 +1,13 @@
 import React, {Component} from 'react';
-import axios from "axios";
 import { connect } from "react-redux";
 
 import './AssestList.css';
-import { retriveRecords, retriveSingleRecord } from '../../redux/actions/actions';
+import { retriveRecordsRequest, retriveSingleRecord } from '../../redux/actions/actions';
 
 class AssestList extends Component{
     
     componentDidMount(){
-        axios.get("http://localhost:9090/assest").then((payload)=>{
-            this.props.retriveData(payload.data);
-        }).catch((err)=>{
-            console.log(err);
-        })
-    }
-
-    componentDidUpdate(){
-        if(this.props.reloadHomeRoute){
-            // this.props.history.push("/");
-        }
+        this.props.retriveRecordsRequest();
     }
 
     onSelectingRecord(selectedElement){
@@ -61,8 +50,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        retriveData: (records) =>{
-            return dispatch(retriveRecords(records));
+        retriveRecordsRequest: () =>{
+            return dispatch(retriveRecordsRequest());
         },
         detailedRecord: (recordId) =>{
             return dispatch(retriveSingleRecord(recordId));

@@ -54,12 +54,8 @@ class AddNewItemForm extends Component{
     formSubmitHandler = (event) => {
         event.preventDefault();
         this.props.postAddRecordRequest(this.state.placeHolder);
-        // this.props.history.push('/');
     }
 
-    componentWillUpdate(){
-        console.log("update");
-    }
 
     render(){
         let redirect = null;

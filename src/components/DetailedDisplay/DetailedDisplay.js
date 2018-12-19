@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { changeSystemNumberRequest } from "../../redux/actions/actions";
+import { changeSystemNumberRequest, 
+    clearSingleRecordSelection,
+    deleteRecordRequest } from "../../redux/actions/actions";
 
 import "./DetailedDisplay.css"
 
@@ -12,6 +14,11 @@ class DetailedDisplay extends Component{
         editedSystem_number: ''
     }
 
+    componentWillReceiveProps(nextProps){
+        if(this.props.selectedRecord!=null && nextProps.selectedRecord!=null && (this.props.selectedRecord._id!==nextProps.selectedRecord._id))
+            this.setState({updateRecord: false});
+
+    }
     updateHandler = () =>{
         this.setState({updateRecord: true})
     }
@@ -20,12 +27,19 @@ class DetailedDisplay extends Component{
         this.setState({editedSystem_number: event.target.value})
     }
 
+    deleteRequestHandler = () =>{
+        this.props.deleteRecordRequest(this.props.selectedRecord._id);
+    }
+
     changeSystemNumberInDb = () =>{
         //change users system number
         this.props.changeSystemNumberRequest({
             system_number: this.state.editedSystem_number,
             _id: this.props.selectedRecord._id
         });
+
+        // clear single record that the user selected from the table just from state
+        this.props.clearSingleRecordSelection();
     }
 
     render(){
@@ -72,7 +86,10 @@ class DetailedDisplay extends Component{
                             className="btn btn-info"
                             onClick={this.updateHandler}>Update</button>
                     }
-                    <button type="button" className="btn btn-danger">Delete</button>
+                    <button 
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={this.deleteRequestHandler}>Delete</button>
                 </div>
             </div>
             : null
@@ -90,6 +107,12 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         changeSystemNumberRequest: (changeData) => {
             dispatch(changeSystemNumberRequest(changeData));
+        },
+        clearSingleRecordSelection: () => {
+            dispatch(clearSingleRecordSelection());
+        },
+        deleteRecordRequest: (selectedRecordId) =>{
+            dispatch(deleteRecordRequest(selectedRecordId))
         }
     }
 }
