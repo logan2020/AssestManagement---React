@@ -1,6 +1,7 @@
 import * as actionTypes from "../constants/action-types";
 import  axios from "axios";
 
+
 export const addRecord = (record) => {
     return ({
         type: actionTypes.ADD_RECORD,
@@ -26,7 +27,6 @@ export const retriveRecords= (listOfRecords) => {
         payload: listOfRecords
     });
 }
-
 export const retriveRecordsRequest = () => {
     return (dispatch) => {
         axios.get("http://localhost:9090/assest").then((payload)=>{
@@ -128,19 +128,28 @@ export const registerUserRequestSuccess = (userInfo) =>{
 //login starts here
 export const login = (userInfo) => {
     return (dispatch)=>{
-        console.log("axios login goes here");
+        axios.post("http://localhost:9090/signIn",userInfo)
+        .then((payload)=>{
+            dispatch(loginRequestSuccess(payload.data));
+            localStorage.setItem('jwt',payload.data.token);
+            dispatch(redirectToHome());
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
 
     }
 }
-export const loginRequestSuccess = (msg) =>{
+export const loginRequestSuccess = (payload) =>{
     return{
         type: actionTypes.LOGIN_REQUEST_SUCCESS,
-        payload: msg
+        payload: payload
     }
 }
 // login ends here
 
 // redirect routes parts
+// For Login parts
 export const redirectToLogin = () =>{
     return {
         type: actionTypes.REDIRECT_TO_LOGIN
@@ -150,5 +159,18 @@ export const redirectToLogin = () =>{
 export const clearRedirectionToLogin = () => {
     return{
         type: actionTypes.CLEAR_REDIRECTION_TO_LOGIN
+    }
+}
+
+// For Home page parts
+export const redirectToHome = () =>{
+    return {
+        type: actionTypes.REDIRECT_TO_HOME
+    }
+}
+
+export const clearRedirectionToHome = () => {
+    return{
+        type: actionTypes.CLEAR_REDIRECTION_TO_HOME
     }
 }

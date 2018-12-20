@@ -14,7 +14,10 @@ const initialStore={
     addRecordSuccessfull: false,
     reloadHomeRoute: false,
     apiRequestFeedback: null,
-    authendicated: false
+    authendicated: false,
+    // after login set jwt token and logged in userInfo
+    jwtToken: '',
+    loggedInUserInfo: {}
 }
 
 
@@ -81,7 +84,9 @@ const rootReducer = (state=initialStore, action) => {
         case actionTypes.LOGIN_REQUEST_SUCCESS:{
             return{
                 ...state,
-                apiRequestFeedback: action.payload
+                apiRequestFeedback: action.payload.status,
+                jwtToken: action.payload.token,
+                loggedInUserInfo: action.payload.userData
             }
         }
 

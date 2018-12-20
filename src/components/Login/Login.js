@@ -1,12 +1,10 @@
 import React,{ Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from "@material-ui/core/AppBar";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import {AppBar,Toolbar,Typography} from "@material-ui/core";
+import {TextField, RaisedButton} from "material-ui";
 
 import { clearRedirectionToLogin, login } from "../../redux/actions/actions";
 
@@ -17,8 +15,8 @@ class Login extends Component{
     }
 
     state={
-        email:'',
-        password: ''
+        email:'vijaydce2020@mail.com',
+        password: '60607777'
     }
 
     // form control handlers
@@ -49,11 +47,12 @@ class Login extends Component{
         }
         return(
             <React.Fragment>
+                {this.props.redirectToHome?<Redirect to="/"/>:null}
                 <MuiThemeProvider>
                     <div>
-                        <AppBar position="static">
+                        <AppBar position="static" title="Login">
                             <Toolbar>
-                                <Typography variant="title" color="inherit">
+                                <Typography variant="h6" color="inherit">
                                     Login
                                 </Typography>
                             </Toolbar>
@@ -85,14 +84,20 @@ class Login extends Component{
     }
 }
 
+const mapStateToProps = (state) =>{
+    return{
+        redirectToHome: state.redirectToHome
+    }
+}
+
 const mapDispatchToProps = (dispatch) =>{
     return {
         clearRedirectionToLogin: () =>{
             return dispatch(clearRedirectionToLogin());
         },
-        login: () => {
-            return dispatch(login());
+        login: (userInfo) => {
+            return dispatch(login(userInfo));
         }
     }
 }
-export default connect(null,mapDispatchToProps) (Login);
+export default connect(mapStateToProps,mapDispatchToProps) (Login);

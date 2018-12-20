@@ -3,11 +3,25 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from 'redux-thunk';
+import * as axios from "axios";
 
 import rootReducer from "../src/redux/reducers/reducer";
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+// axios defaults starts here
+axios.interceptors.request.use(function(config) {
+    let jwt = localStorage.getItem('jwt');
+    if ( jwt != null ) {
+      config.headers["x-access-token"] = jwt;
+    }
+  
+    return config;
+  }, function(err) {
+    return Promise.reject(err);
+  });
+// axios defaults ends here
 
 const logger = (store) => {
     return (next) => {
