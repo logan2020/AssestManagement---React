@@ -1,0 +1,7 @@
+
+div[data-component="AddNewItemForm"].formHolder{
+    border: 1px solid #ccc;
+}
+[data-component="AddNewItemForm"].formHolder h3{
+    margin: 20px;
+}

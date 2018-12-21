@@ -1,0 +1,22 @@
+[data-component="detailed-component"].detailedRecord{
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 2px 2px #ccc;
+}
+[data-component="detailed-component"].detailedRecord {
+    display: inline-block;
+}
+
+[data-component="detailed-component"].detailedRecord h4{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+[data-component="detailed-component"].detailedRecord div.buttonHolder {
+    display: flex;
+    justify-content: space-around;
+}
+[data-component="detailed-component"].detailedRecord div {
+    margin-bottom: 1rem;
+}

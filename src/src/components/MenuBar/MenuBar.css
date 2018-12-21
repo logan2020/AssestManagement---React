@@ -1,0 +1,14 @@
+nav[data-component="menu-bar"] ul li.nav-item a.nav-link{
+    color: white;
+    font-weight: 700;
+}
+nav[data-component="menu-bar"] li img{
+    width: 50px;
+}
+nav[data-component="menu-bar"] ul li.nav-item a.nav-link.active{
+    color: red;
+}
+nav[data-component="menu-bar"] div.sign-off-button-holder{
+    width: 100%;
+    text-align: right;
+}
