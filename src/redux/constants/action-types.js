@@ -14,6 +14,13 @@ export const REGISTER_USER_REQUEST_SUCCESS = "REGISTER_USER_REQUEST_SUCCESS";
 // login request
 export const LOGIN_REQUEST_SUCCESS="LOGIN_REQUEST_SUCCESS";
 
+// Check whether logged in or not
+export const USER_LOGGED_IN = "USER_LOGGED_IN";
+export const USER_LOGGED_OFF = "USER_LOGGED_OFF";
+
+// Clear Page Level Notifiaction
+export const CLEAR_PAGE_LEVEL_NOTIFICATION = "CLEAR_PAGE_LEVEL_NOTIFICATION";
+
 // Redirection
 // login
 export const REDIRECT_TO_LOGIN = "REDIRECT_TO_LOGIN";

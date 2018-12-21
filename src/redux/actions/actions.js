@@ -12,7 +12,7 @@ export const addRecord = (record) => {
 //async function to post record
 export const postAddRecordRequest = (record) =>{
     return (dispatch) => {
-        axios.post("http://localhost:9090/assest",record).then((payload)=>{
+        axios.post("/assest",record).then((payload)=>{
                 dispatch(addRecord(payload.data));
                 dispatch(postRecordSuccessfull());
         }).catch((err)=>{
@@ -29,7 +29,7 @@ export const retriveRecords= (listOfRecords) => {
 }
 export const retriveRecordsRequest = () => {
     return (dispatch) => {
-        axios.get("http://localhost:9090/assest").then((payload)=>{
+        axios.get("/assest").then((payload)=>{
             dispatch(retriveRecords(payload.data));
         }).catch((err)=>{
             console.log(err);
@@ -62,7 +62,7 @@ export const changeSystemNumberRequest = (changeData) =>{
     //  _id : mongo id
     // }
     return (dispatch) => {
-        axios.put("http://localhost:9090/assest/edit",changeData)
+        axios.put("/assest/edit",changeData)
         .then((payload)=>{
             dispatch(changeSystemNumberRequestSuccess());
             dispatch(retriveRecordsRequest())
@@ -85,7 +85,7 @@ export const deleteRecordRequest = (selectedRecordId) => {
         _id:selectedRecordId
     }
     return (dispatch)=>{
-        axios.delete("http://localhost:9090/assest",{data})
+        axios.delete("/assest",{data})
             .then((payload)=>{
                 dispatch(deleteRecordRequestSuccess("Your Record deleted successfully"));
                 dispatch(clearSingleRecordSelection());
@@ -108,7 +108,7 @@ export const deleteRecordRequestSuccess = (apiRequestFeedback) =>{
 // registration starts here
 export const registerUser = (userInformation) =>{
     return (dispatch) => {
-        axios.post("http://localhost:9090/addUser",userInformation)
+        axios.post("/addUser",userInformation)
         .then((data)=>{
             dispatch(registerUserRequestSuccess("Registration sucess"));
             dispatch(redirectToLogin())
@@ -128,11 +128,12 @@ export const registerUserRequestSuccess = (userInfo) =>{
 //login starts here
 export const login = (userInfo) => {
     return (dispatch)=>{
-        axios.post("http://localhost:9090/signIn",userInfo)
+        axios.post("/signIn",userInfo)
         .then((payload)=>{
             dispatch(loginRequestSuccess(payload.data));
             localStorage.setItem('jwt',payload.data.token);
             dispatch(redirectToHome());
+            dispatch(userLoggedIn());
         })
         .catch((err)=>{
             console.log(err);
@@ -146,7 +147,25 @@ export const loginRequestSuccess = (payload) =>{
         payload: payload
     }
 }
+
+export const userLoggedIn=() => {
+    return{
+        type: actionTypes.USER_LOGGED_IN
+    }
+}
+export const userLoggedOff=() => {
+    return{
+        type: actionTypes.USER_LOGGED_OFF
+    }
+}
 // login ends here
+
+//clear page Level Notification
+export const clearPageLevelNotification = () => {
+    return{
+        type: actionTypes.CLEAR_PAGE_LEVEL_NOTIFICATION
+    }
+}
 
 // redirect routes parts
 // For Login parts

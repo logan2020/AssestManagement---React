@@ -8,3 +8,7 @@ nav[data-component="menu-bar"] li img{
 nav[data-component="menu-bar"] ul li.nav-item a.nav-link.active{
     color: red;
 }
+nav[data-component="menu-bar"] div.sign-off-button-holder{
+    width: 100%;
+    text-align: right;
+}

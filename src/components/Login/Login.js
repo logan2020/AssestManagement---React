@@ -11,7 +11,7 @@ import { clearRedirectionToLogin, login } from "../../redux/actions/actions";
 class Login extends Component{
 
     componentDidMount(){
-        this.props.clearRedirectionToLogin();
+        // this.props.clearRedirectionToLogin();
     }
 
     state={

@@ -90,6 +90,37 @@ const rootReducer = (state=initialStore, action) => {
             }
         }
 
+        // set state.authendiacted=true once the user logged in 
+        case actionTypes.USER_LOGGED_IN:{
+            if(localStorage.getItem("jwt")!=null)
+            {   
+                return{
+                    ...state,
+                    authendicated: true
+                }
+            }
+            return{
+                ...state
+            }
+        }
+        // set state.authendiacted=true once the user logged in 
+        case actionTypes.USER_LOGGED_OFF:{
+            localStorage.removeItem("jwt");
+            return {
+                ...state,
+                authendicated: false,
+                apiRequestFeedback: "You successfully signed off"
+            }
+        }
+
+        case actionTypes.CLEAR_PAGE_LEVEL_NOTIFICATION:{
+            return{
+                ...state,
+                apiRequestFeedback: null
+            }
+        }
+
+        // Redirect codes below
         // REDIRECT_TO_LOGIN page code start here
         case actionTypes.REDIRECT_TO_LOGIN:{
             return{

@@ -11,6 +11,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // axios defaults starts here
+axios.defaults.baseURL = "http://localhost:9090";
 axios.interceptors.request.use(function(config) {
     let jwt = localStorage.getItem('jwt');
     if ( jwt != null ) {
