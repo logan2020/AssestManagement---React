@@ -23,7 +23,6 @@ class PagelLevelNotification extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(nextProps,this.props.apiRequestFeedback);
         if(nextProps.feedback!==this.props.apiRequestFeedback){
             setTimeout(()=>{
                 this.props.clearPageLevelNotification();

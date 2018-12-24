@@ -11,7 +11,6 @@ import  AddNewItemForm from '../AddNewItem/AddNewItemForm/AddNewItemForm'
 import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
 import Home  from "../../containers/Home/Home";
-// import { PrivateRoute } from "../../containers/HOC/PrivateRoute/PrivateRoute";
 import AuthGuard from "../../containers/HOC/AuthGuard/AuthGuard";
 
 const GuardHomeComponent = AuthGuard(Home);
@@ -30,12 +29,8 @@ class Layout extends Component{
                         <Route path="/register" component={Registration}/>
                         <Route path="/login" component={Login}/>
                         {/* Authendicated app */}
-                        {/* <PrivateRoute path="/add" component={AddNewItemForm}/> */}
-                        {/* <PrivateRoute to='/' exact component={Home}/> */}
                         <GuardAddNewItemFormComponent path="/add" component={AddNewItemForm}/>
                         <GuardHomeComponent to='/home' exact component={Home}/>
-                        {/* <Route path="/home" exact component={AuthGuard(Home)}/> */}
-                        {/* <Route path="/add" component={AuthGuard(AddNewItemForm)}/> */}
                     </Switch>
 
                 </main>
