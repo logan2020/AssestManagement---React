@@ -132,8 +132,8 @@ export const login = (userInfo) => {
         .then((payload)=>{
             dispatch(loginRequestSuccess(payload.data));
             localStorage.setItem('jwt',payload.data.token);
-            dispatch(redirectToHome());
             dispatch(userLoggedIn());
+            dispatch(redirectToHome());
         })
         .catch((err)=>{
             console.log(err);

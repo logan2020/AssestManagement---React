@@ -47,7 +47,7 @@ class Login extends Component{
         }
         return(
             <React.Fragment>
-                {this.props.redirectToHome?<Redirect to="/"/>:null}
+                {this.props.redirectToHome?<Redirect to="/home"/>:null}
                 <MuiThemeProvider>
                     <div>
                         <AppBar position="static" title="Login">

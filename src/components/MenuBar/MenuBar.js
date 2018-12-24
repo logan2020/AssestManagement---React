@@ -30,7 +30,7 @@ export class MenuBar extends Component{
                             <img src={logo} alt="Logo comes here" />
                         </li>
                         <li className="nav-item">
-                            <NavLink exact={true} activeClassName="active" className="nav-link" to='/'>Home</NavLink>
+                            <NavLink exact={true} activeClassName="active" className="nav-link" to='/home'>Home</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink activeClassName="active" className="nav-link" to='/add'>add</NavLink>

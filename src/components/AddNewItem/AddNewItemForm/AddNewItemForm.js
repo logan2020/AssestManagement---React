@@ -60,7 +60,7 @@ class AddNewItemForm extends Component{
     render(){
         let redirect = null;
         if(this.props.addRecordSuccessfull)
-            redirect= <Redirect to="/"/>;
+            redirect= <Redirect to="/home"/>;
         return(
             <div data-component="AddNewItemForm" className="formHolder container">
                 <h3>Enter Your details Below</h3>

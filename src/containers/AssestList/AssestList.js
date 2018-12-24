@@ -14,6 +14,10 @@ class AssestList extends Component{
         this.props.detailedRecord(selectedElement);
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        return this.props.assestLists!==nextProps.assestLists;
+    }
+
     render(){
         return (
             <table data-component="AssestList" className="table table-striped table-bordered">
