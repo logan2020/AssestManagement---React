@@ -11,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 
 import { registerUser } from "../../redux/actions/actions";
 import { Validators } from "../../containers/Utils/Validation/Validators";
+import './Registration.css'
+
 const ValidationSupport= new Validators();
 
 class Registration extends Component {
@@ -87,7 +89,8 @@ class Registration extends Component {
         for(let fieldName in duplicateFormFields){
             let validationRulesArray= duplicateFormFields[fieldName].validators;
             let FieldError = false;
-            validationRulesArray.map((rulePlusErrorMessageObj)=>{
+            // eslint-disable-next-line
+            validationRulesArray.forEach((rulePlusErrorMessageObj)=>{
                 for(let rule in rulePlusErrorMessageObj){
                     if(ValidationSupport.validate(rule, this.state.placeHolder[fieldName])!==''){
                         duplicateFormFields[fieldName].errorMessage=rulePlusErrorMessageObj[ValidationSupport.validate(rule, this.state.placeHolder[fieldName])];

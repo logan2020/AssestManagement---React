@@ -1,0 +1,7 @@
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    width: 256px;
+    margin: auto;
+}

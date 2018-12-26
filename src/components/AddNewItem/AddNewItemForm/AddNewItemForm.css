@@ -5,3 +5,12 @@ div[data-component="AddNewItemForm"].formHolder{
 [data-component="AddNewItemForm"].formHolder h3{
     margin: 20px;
 }
+div[data-component="AddNewItemForm"].formHolder .alert-danger{
+    width: unset;
+    margin-left: 50%;   
+}
+@media (max-width: 768px) {
+    div[data-component="AddNewItemForm"].formHolder .alert-danger{
+        margin: auto;
+    }
+}
