@@ -1,6 +1,7 @@
-import * as actionTypes from "../constants/action-types";
 import  axios from "axios";
 
+import * as actionTypes from "../constants/action-types";
+import { redirectToLogin, redirectToHome } from "./redirectActions";
 
 export const addRecord = (record) => {
     return ({
@@ -136,7 +137,10 @@ export const login = (userInfo) => {
             dispatch(redirectToHome());
         })
         .catch((err)=>{
-            console.log(err);
+            if(err.response.status==401){
+                dispatch(loginRequestFailure(err.response.data["message"]));
+            }
+            console.log("sign in error",err);
         })
 
     }
@@ -144,6 +148,13 @@ export const login = (userInfo) => {
 export const loginRequestSuccess = (payload) =>{
     return{
         type: actionTypes.LOGIN_REQUEST_SUCCESS,
+        payload: payload
+    }
+}
+
+export const loginRequestFailure = (payload) =>{
+    return{
+        type: actionTypes.LOGIN_REQUEST_FAILURE,
         payload: payload
     }
 }
@@ -167,29 +178,29 @@ export const clearPageLevelNotification = () => {
     }
 }
 
-// redirect routes parts
-// For Login parts
-export const redirectToLogin = () =>{
-    return {
-        type: actionTypes.REDIRECT_TO_LOGIN
-    }
-}
+// // redirect routes parts
+// // For Login parts
+// export const redirectToLogin = () =>{
+//     return {
+//         type: actionTypes.REDIRECT_TO_LOGIN
+//     }
+// }
 
-export const clearRedirectionToLogin = () => {
-    return{
-        type: actionTypes.CLEAR_REDIRECTION_TO_LOGIN
-    }
-}
+// export const clearRedirectionToLogin = () => {
+//     return{
+//         type: actionTypes.CLEAR_REDIRECTION_TO_LOGIN
+//     }
+// }
 
-// For Home page parts
-export const redirectToHome = () =>{
-    return {
-        type: actionTypes.REDIRECT_TO_HOME
-    }
-}
+// // For Home page parts
+// export const redirectToHome = () =>{
+//     return {
+//         type: actionTypes.REDIRECT_TO_HOME
+//     }
+// }
 
-export const clearRedirectionToHome = () => {
-    return{
-        type: actionTypes.CLEAR_REDIRECTION_TO_HOME
-    }
-}
+// export const clearRedirectionToHome = () => {
+//     return{
+//         type: actionTypes.CLEAR_REDIRECTION_TO_HOME
+//     }
+// }

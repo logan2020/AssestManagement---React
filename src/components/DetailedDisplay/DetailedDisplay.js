@@ -99,7 +99,7 @@ class DetailedDisplay extends Component{
 
 const mapStateToProps= (state) =>{
     return{
-        selectedRecord: state.selectedRecord
+        selectedRecord: state.root.selectedRecord
     }
 }
 

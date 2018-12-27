@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import thunk from 'redux-thunk';
 import * as axios from "axios";
 
-import rootReducer from "../src/redux/reducers/reducer";
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import rootReducer from "../src/redux/reducers/reducer";
+import redirectReducer from "./redux/reducers/redirect";
 
 // axios defaults starts here
 axios.defaults.baseURL = "http://localhost:9090";
@@ -35,7 +37,12 @@ const logger = (store) => {
     }
 }
 
-const store = createStore(rootReducer, applyMiddleware(logger,thunk));
+const root=combineReducers({
+    root: rootReducer,
+    redirect: redirectReducer
+});
+
+const store = createStore(root, applyMiddleware(logger,thunk));
 window.store= store;
 ReactDOM.render(
     <Provider store={store}>

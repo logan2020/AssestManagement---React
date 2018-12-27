@@ -199,8 +199,8 @@ class AddNewItemForm extends Component{
 
 const mapStateToProps = (state) =>{
     return{
-        placeHolderProp: state.placeHolder,
-        addRecordSuccessfull: state.addRecordSuccessfull
+        placeHolderProp: state.root.placeHolder,
+        addRecordSuccessfull: state.root.addRecordSuccessfull
     }
 }
 

@@ -1,15 +1,7 @@
 import * as actionTypes from "../constants/action-types";
 
 const initialStore={
-    redirectToLogin: false,
-    redirectToHome: false,
     assestLists: [],
-    placeHolder: {
-        "name": "Your name",
-        "SAP_Id": "5177210",
-        "email_Id": "mail@mail.com",
-        "system_number": "RW-04-2B-W-XXX"
-    },
     selectedRecord: null,
     addRecordSuccessfull: false,
     reloadHomeRoute: false,
@@ -81,6 +73,12 @@ const rootReducer = (state=initialStore, action) => {
             }
         }
         //login
+        case actionTypes.LOGIN_REQUEST_FAILURE:{
+            return{
+                ...state,
+                apiRequestFeedback: action.payload
+            }
+        }
         case actionTypes.LOGIN_REQUEST_SUCCESS:{
             return{
                 ...state,
@@ -103,7 +101,7 @@ const rootReducer = (state=initialStore, action) => {
                 ...state
             }
         }
-        // set state.authendiacted=true once the user logged in 
+        // set state.authendiacted=false once the user logged in 
         case actionTypes.USER_LOGGED_OFF:{
             localStorage.removeItem("jwt");
             return {
@@ -120,38 +118,6 @@ const rootReducer = (state=initialStore, action) => {
             }
         }
 
-        // Redirect codes below
-        // REDIRECT_TO_LOGIN page code start here
-        case actionTypes.REDIRECT_TO_LOGIN:{
-            return{
-                ...state,
-                redirectToLogin: true
-            }
-        }
-
-        case actionTypes.CLEAR_REDIRECTION_TO_LOGIN:{
-            return {
-                ...state,
-                redirectToLogin: false
-            }
-        }
-        // REDIRECT_TO_LOGIN page code ends here
-
-        // REDIRECT_TO_HOME page code start here
-        case actionTypes.REDIRECT_TO_HOME:{
-            return{
-                ...state,
-                redirectToHome: true
-            }
-        }
-
-        case actionTypes.CLEAR_REDIRECTION_TO_HOME:{
-            return {
-                ...state,
-                redirectToHome: false
-            }
-        }
-        // REDIRECT_TO_LOGIN page code ends here
         default:
             return state;
     }

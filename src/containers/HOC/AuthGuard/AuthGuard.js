@@ -24,7 +24,7 @@ export default function(ProtectedComponent, ...rest){
 
     const mapStateToProps= (state)=>{
         return{
-            authendicated: state.authendicated
+            authendicated: state.root.authendicated
         }
     }
 

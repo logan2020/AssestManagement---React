@@ -51,7 +51,7 @@ export class MenuBar extends Component{
 
 const mapStateToProps= (state) => {
     return{
-        authendicated: state.authendicated
+        authendicated: state.root.authendicated
     }
 }
 

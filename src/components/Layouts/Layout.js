@@ -45,7 +45,7 @@ class Layout extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        assestLists: state.assestLists
+        assestLists: state.root.assestLists
     }
 }
 

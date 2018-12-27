@@ -184,7 +184,7 @@ class Registration extends Component {
 
 const mapStateToProps = (state) =>{
     return {
-        redirectToLogin: state.redirectToLogin
+        redirectToLogin: state.root.redirectToLogin
     }
 }
 

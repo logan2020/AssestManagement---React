@@ -74,7 +74,7 @@ class PagelLevelNotification extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        feedback: state.apiRequestFeedback
+        feedback: state.root.apiRequestFeedback
     }
 }
 

@@ -6,7 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {AppBar,Toolbar,Typography} from "@material-ui/core";
 import {TextField, RaisedButton} from "material-ui";
 
-import { clearRedirectionToLogin, login } from "../../redux/actions/actions";
+import { login } from "../../redux/actions/actions";
+import { clearRedirectionToLogin } from "../../redux/actions/redirectActions";
 import { Validators } from "../../containers/Utils/Validation/Validators";
 
 const ValidationSupport= new Validators();
@@ -150,7 +151,7 @@ class Login extends Component{
 
 const mapStateToProps = (state) =>{
     return{
-        redirectToHome: state.redirectToHome
+        redirectToHome: state.redirect.redirectToHome
     }
 }
 

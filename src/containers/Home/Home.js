@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import DetailedDisplay from "../../components/DetailedDisplay/DetailedDisplay";
 import AssestList from '../AssestList/AssestList'
-import { clearRedirectionToHome } from "../../redux/actions/actions";
+import { clearRedirectionToHome } from "../../redux/actions/redirectActions";
 
 class Home extends Component{
     
@@ -12,7 +12,6 @@ class Home extends Component{
             this.props.clearRedirectionToHome();
         }
     }
-
 
     render(){
         return(
@@ -27,7 +26,7 @@ class Home extends Component{
 
 const mapStateToProps = (state) =>{
     return{
-        redirectToHome: state.redirectToHome
+        redirectToHome: state.redirect.redirectToHome
     }
 }
 
