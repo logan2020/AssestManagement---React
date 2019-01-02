@@ -22,6 +22,11 @@ export const USER_LOGGED_OFF = "USER_LOGGED_OFF";
 // Clear Page Level Notifiaction
 export const CLEAR_PAGE_LEVEL_NOTIFICATION = "CLEAR_PAGE_LEVEL_NOTIFICATION";
 
+// To show and hide Spinner
+export const SHOW_SPINNER = "SHOW_SPINNER";
+export const HIDE_SPINNER = "HIDE_SPINNER";
+
+
 // Redirection
 // login
 export const REDIRECT_TO_LOGIN = "REDIRECT_TO_LOGIN";

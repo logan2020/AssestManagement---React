@@ -13,10 +13,13 @@ export const addRecord = (record) => {
 //async function to post record
 export const postAddRecordRequest = (record) =>{
     return (dispatch) => {
+        dispatch(showSpinner());
         axios.post("/assest",record).then((payload)=>{
                 dispatch(addRecord(payload.data));
+                dispatch(hideSpinner());
                 dispatch(postRecordSuccessfull());
         }).catch((err)=>{
+            dispatch(hideSpinner());
             console.log(err);
         });
     }
@@ -30,10 +33,13 @@ export const retriveRecords= (listOfRecords) => {
 }
 export const retriveRecordsRequest = () => {
     return (dispatch) => {
+        dispatch(showSpinner());
         axios.get("/assest").then((payload)=>{
             dispatch(retriveRecords(payload.data));
+            dispatch(hideSpinner());
         }).catch((err)=>{
             console.log(err);
+            dispatch(hideSpinner());
         })
     }
 }
@@ -86,12 +92,15 @@ export const deleteRecordRequest = (selectedRecordId) => {
         _id:selectedRecordId
     }
     return (dispatch)=>{
+        dispatch(showSpinner());
         axios.delete("/assest",{data})
             .then((payload)=>{
+                dispatch(hideSpinner());
                 dispatch(deleteRecordRequestSuccess("Your Record deleted successfully"));
                 dispatch(clearSingleRecordSelection());
                 dispatch(retriveRecordsRequest());
             }).catch((err)=>{
+                dispatch(hideSpinner());
                 console.log(err);
             })
     }
@@ -129,16 +138,23 @@ export const registerUserRequestSuccess = (userInfo) =>{
 //login starts here
 export const login = (userInfo) => {
     return (dispatch)=>{
+        dispatch(showSpinner());
         axios.post("/signIn",userInfo)
         .then((payload)=>{
             dispatch(loginRequestSuccess(payload.data));
             localStorage.setItem('jwt',payload.data.token);
             dispatch(userLoggedIn());
+            dispatch(hideSpinner());
             dispatch(redirectToHome());
         })
         .catch((err)=>{
-            if(err.response.status==401){
+            if(err.response.status===401){
                 dispatch(loginRequestFailure(err.response.data["message"]));
+                dispatch(hideSpinner());
+            }
+            if(err.response.status===500){
+                dispatch(loginRequestFailure("Internal server error try again later"));
+                dispatch(hideSpinner());
             }
             console.log("sign in error",err);
         })
@@ -178,29 +194,15 @@ export const clearPageLevelNotification = () => {
     }
 }
 
-// // redirect routes parts
-// // For Login parts
-// export const redirectToLogin = () =>{
-//     return {
-//         type: actionTypes.REDIRECT_TO_LOGIN
-//     }
-// }
+// To show and hide spinner
+export const showSpinner = () =>{
+    return {
+        type: actionTypes.SHOW_SPINNER
+    }
+}
 
-// export const clearRedirectionToLogin = () => {
-//     return{
-//         type: actionTypes.CLEAR_REDIRECTION_TO_LOGIN
-//     }
-// }
-
-// // For Home page parts
-// export const redirectToHome = () =>{
-//     return {
-//         type: actionTypes.REDIRECT_TO_HOME
-//     }
-// }
-
-// export const clearRedirectionToHome = () => {
-//     return{
-//         type: actionTypes.CLEAR_REDIRECTION_TO_HOME
-//     }
-// }
+export const hideSpinner = () => {
+    return{
+        type: actionTypes.HIDE_SPINNER
+    }
+}

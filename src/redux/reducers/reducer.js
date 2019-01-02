@@ -9,7 +9,8 @@ const initialStore={
     authendicated: false,
     // after login set jwt token and logged in userInfo
     jwtToken: '',
-    loggedInUserInfo: {}
+    loggedInUserInfo: {},
+    showSpinner: false
 }
 
 
@@ -115,6 +116,20 @@ const rootReducer = (state=initialStore, action) => {
             return{
                 ...state,
                 apiRequestFeedback: null
+            }
+        }
+
+        case actionTypes.SHOW_SPINNER:{
+            return{
+                ...state,
+                showSpinner: true
+            }
+        }
+
+        case actionTypes.HIDE_SPINNER:{
+            return{
+                ...state,
+                showSpinner: false
             }
         }
 

@@ -12,6 +12,7 @@ import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
 import Home  from "../../containers/Home/Home";
 import AuthGuard from "../../containers/HOC/AuthGuard/AuthGuard";
+import Spinner from "../../containers/Spinner/Spinner";
 
 const GuardHomeComponent = AuthGuard(Home);
 const GuardAddNewItemFormComponent = AuthGuard(AddNewItemForm);
@@ -22,6 +23,7 @@ class Layout extends Component{
         return(
             <div>
                 <MenuBar></MenuBar>
+                <Spinner></Spinner>
                 <main className="container">
                     <PagelLevelNotification/>
                     <Switch>
