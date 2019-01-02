@@ -148,11 +148,11 @@ export const login = (userInfo) => {
             dispatch(redirectToHome());
         })
         .catch((err)=>{
-            if(err.response.status===401){
+            if(err.response && err.response.status===401){
                 dispatch(loginRequestFailure(err.response.data["message"]));
                 dispatch(hideSpinner());
             }
-            if(err.response.status===500){
+            if(err.response && err.response.status===500){
                 dispatch(loginRequestFailure("Internal server error try again later"));
                 dispatch(hideSpinner());
             }
