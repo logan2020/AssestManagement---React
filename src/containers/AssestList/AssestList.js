@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
+import { withRouter } from 'react-router'
 
 import { withStyles } from '@material-ui/core/styles';
 // import {Table, TableBody, TableCell, TableHead, TableRow, Paper} from '@material-ui/core';
-
+import Button from '@material-ui/core/Button';
 
 import './AssestList.css';
 import { retriveRecordsRequest, retriveSingleRecord } from '../../redux/actions/actions';
@@ -32,6 +33,13 @@ class AssestList extends Component{
 
     shouldComponentUpdate(nextProps, nextState){
         return this.props.assestLists!==nextProps.assestLists;
+    }
+
+    changeRouteWithParam = (personId)=> {
+        console.log(personId);
+        this.props.history.push({
+            pathname: 'locate/'+personId
+        });
     }
 
     render(){
@@ -70,15 +78,25 @@ class AssestList extends Component{
                         <th> SAP ID </th>
                         <th> Email Id </th>
                         <th> System Number </th>
+                        <th> Edit </th>
                     </tr>
                 </thead>
                 <tbody>
                     {this.props.assestLists.map((person,key )=>{
-                        return (<tr onClick={()=>this.onSelectingRecord(person._id)} key={person._id}>
+                        return (<tr key={person._id}>
                                 <td> {person.name} </td>
-                                <td> {person.sap_id} </td>
+                                <td 
+                                    onClick={()=>{this.changeRouteWithParam(person._id)}}>
+                                    {person.sap_id}
+                                </td>
                                 <td> {person.email} </td>
                                 <td> {person.system_number} </td>
+                                <td> 
+                                    <Button variant="contained" color="secondary"
+                                    onClick={()=>this.onSelectingRecord(person._id)}>
+                                        Edit
+                                    </Button>
+                                </td>
                             </tr>)
                     })}
                 
@@ -106,4 +124,4 @@ const mapDispatchToProps = (dispatch) =>{
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(AssestList));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(AssestList)));

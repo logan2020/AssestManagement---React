@@ -112,6 +112,15 @@ const rootReducer = (state=initialStore, action) => {
             }
         }
 
+        // to locate page
+        case actionTypes.RETRIVE_SELECTED_RECORD_SUCCESS:{
+            return{
+                ...state,
+                selectedRecord: action.payload
+            }
+        }
+
+        // For Notification
         case actionTypes.CLEAR_PAGE_LEVEL_NOTIFICATION:{
             return{
                 ...state,

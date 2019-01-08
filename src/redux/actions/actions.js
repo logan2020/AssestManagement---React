@@ -187,6 +187,28 @@ export const userLoggedOff=() => {
 }
 // login ends here
 
+// locate user page starts here
+export const retriveSelectedRecordToLocate = (personId)=>{
+    return (dispatch) =>{
+        axios.get('http://localhost:9090/assest/'+personId)
+        .then((payload)=>{
+            let retrivedPersonDetails = payload.data[0];
+            dispatch(retriveSelectedRecordSuccess(retrivedPersonDetails));
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+}
+
+export const retriveSelectedRecordSuccess = (retrivedPersonDetails) => {
+    return{
+        type: actionTypes.RETRIVE_SELECTED_RECORD_SUCCESS,
+        payload: retrivedPersonDetails
+    }
+}
+// locate user page ends here
+
 //clear page Level Notification
 export const clearPageLevelNotification = () => {
     return{

@@ -11,6 +11,7 @@ import  AddNewItemForm from '../AddNewItem/AddNewItemForm/AddNewItemForm'
 import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
 import Home  from "../../containers/Home/Home";
+import Locate from "../../containers/Locate/Locate";
 import AuthGuard from "../../containers/HOC/AuthGuard/AuthGuard";
 import Spinner from "../../containers/Spinner/Spinner";
 
@@ -30,6 +31,7 @@ class Layout extends Component{
                         {/* unauthendiacted routes */}
                         <Route path="/register" component={Registration}/>
                         <Route path="/login" component={Login}/>
+                        <Route path="/locate/:personId" component={Locate}/>
                         {/* Authendicated app */}
                         <GuardAddNewItemFormComponent path="/add" component={AddNewItemForm}/>
                         <GuardHomeComponent to='/home' exact component={Home}/>
