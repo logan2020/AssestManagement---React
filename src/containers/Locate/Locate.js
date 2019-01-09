@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
-import './Locate.module.css';
-// import "../../lib/mapquest";
-// import '../../lib/mapquest.css';
+import styles from './Locate.module.css';
 
 import { retriveSelectedRecordToLocate } from "../../redux/actions/actions";
 
@@ -12,7 +10,6 @@ class Locate extends Component{
 
 
     componentDidUpdate(){
-        console.log(this.props.selectedRecord);
         if(this.props.selectedRecord!==null){
             window.L.mapquest.key = 'PWMquxehwNuRcFnuVpJhaHcAGJGZ6oGa';
     
@@ -48,20 +45,21 @@ class Locate extends Component{
     }
 
     render(){
+        const dp=this.props.selectedRecord!==null && this.props.selectedRecord.dp!==undefined ? this.props.selectedRecord.dp: "https://apac01.safelinks.protection.outlook.com/?url=http%3A%2F%2Fplacehold.it%2F32x32&amp;data=02%7C01%7CLoganathanM%40hcl.com%7Ce10438702b5e4a29975d08d6762db187%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C636826335951784187&amp;sdata=a4Y0bAqdsPfKrNDlM3QvUtmnElSC4hha%2B%2F%2Fv%2BxMEFS8%3D&amp;reserved=0";
         return(
             <React.Fragment>
                 <br/>
                 {this.props.selectedRecord?
-                <div className="container emp-profile">
+                <div className={`container ${styles.empProfile}`} >
                     <form method="post">
                         <div className="row">
                             <div className="col-md-4">
-                                <div className="profile-img">
-                                    <img style={{width: '100%'}} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                <div className={styles.profile_img}>
+                                    <img src={dp} alt=""/>
                                 </div>
                             </div>
                             <div className="col-md-8">
-                                <div className="profile-head">
+                                <div className={styles.profile_head}>
                                     <h5>{this.props.selectedRecord.name}</h5>
                                     <div className="row">
                                             <div className="col-md-6">

@@ -5,6 +5,7 @@ import { withRouter } from 'react-router'
 import { withStyles } from '@material-ui/core/styles';
 // import {Table, TableBody, TableCell, TableHead, TableRow, Paper} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 
 import './AssestList.css';
 import { retriveRecordsRequest, retriveSingleRecord } from '../../redux/actions/actions';
@@ -74,6 +75,7 @@ class AssestList extends Component{
             <table data-component="AssestList" className="table table-striped table-bordered table-responsive">
                 <thead>
                     <tr>
+                        <th> DP</th>
                         <th> Name </th>
                         <th> SAP ID </th>
                         <th> Email Id </th>
@@ -83,10 +85,16 @@ class AssestList extends Component{
                 </thead>
                 <tbody>
                     {this.props.assestLists.map((person,key )=>{
+                        let thumb = person.thumbnail==undefined?"https://apac01.safelinks.protection.outlook.com/?url=http%3A%2F%2Fplacehold.it%2F512x512&amp;data=02%7C01%7CLoganathanM%40hcl.com%7Ce10438702b5e4a29975d08d6762db187%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C636826335951784187&amp;sdata=%2BPzfKP6YGzU0fm0ugMRLPIfSThSTQFlCjB5daxG%2B%2BbI%3D&amp;reserved=0":person.thumbnail;
                         return (<tr key={person._id}>
+                                <td>
+                                    <Avatar 
+                                        alt={person.thumbnail}
+                                        src={thumb} 
+                                        onClick={()=>{this.changeRouteWithParam(person._id)}}/>
+                                </td>
                                 <td> {person.name} </td>
-                                <td 
-                                    onClick={()=>{this.changeRouteWithParam(person._id)}}>
+                                <td>
                                     {person.sap_id}
                                 </td>
                                 <td> {person.email} </td>
