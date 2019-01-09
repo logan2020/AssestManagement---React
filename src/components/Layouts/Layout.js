@@ -17,6 +17,7 @@ import Spinner from "../../containers/Spinner/Spinner";
 
 const GuardHomeComponent = AuthGuard(Home);
 const GuardAddNewItemFormComponent = AuthGuard(AddNewItemForm);
+const GuardLocateComponent = AuthGuard(Locate);
 
 class Layout extends Component{
 
@@ -31,9 +32,9 @@ class Layout extends Component{
                         {/* unauthendiacted routes */}
                         <Route path="/register" component={Registration}/>
                         <Route path="/login" component={Login}/>
-                        <Route path="/locate/:personId" component={Locate}/>
                         {/* Authendicated app */}
-                        <GuardAddNewItemFormComponent path="/add" component={AddNewItemForm}/>
+                        <GuardLocateComponent path="/locate/:personId" component={Locate}/>
+                        <GuardAddNewItemFormComponent exact path="/add" component={AddNewItemForm}/>
                         <GuardHomeComponent to='/home' exact component={Home}/>
                     </Switch>
 

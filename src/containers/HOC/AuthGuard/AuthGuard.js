@@ -10,12 +10,13 @@ export default function(ProtectedComponent, ...rest){
             if(!this.props.authendicated){
                 this.props.history.push("/login");
             }
+            console.log(this.props);
         }
 
         render(){
             return(
                 <Route {...rest} render={(props) => (
-                    <ProtectedComponent {...props} />
+                    <ProtectedComponent {...this.props} {...props}/>
                 )} />
             );
         }

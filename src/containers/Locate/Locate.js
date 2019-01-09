@@ -41,7 +41,8 @@ class Locate extends Component{
     }
 
     componentDidMount(){
-        this.props.retriveSelectedRecord(this.props.match.params.personId);        
+        console.log(this.props);
+        this.props.retriveSelectedRecord(this.props.computedMatch.params.personId);        
     }
 
     render(){
@@ -104,7 +105,7 @@ class Locate extends Component{
                             </div>
                         </div>
                     </form>           
-                </div>:null}
+                </div>:<h1>no selectedRecord found</h1>}
             </React.Fragment>
             
         );
