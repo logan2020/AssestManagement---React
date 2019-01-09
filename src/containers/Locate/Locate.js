@@ -3,12 +3,48 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
 import './Locate.module.css';
+// import "../../lib/mapquest";
+// import '../../lib/mapquest.css';
+
 import { retriveSelectedRecordToLocate } from "../../redux/actions/actions";
 
 class Locate extends Component{
+
+
+    componentDidUpdate(){
+        console.log(this.props.selectedRecord);
+        if(this.props.selectedRecord!==null){
+            window.L.mapquest.key = 'PWMquxehwNuRcFnuVpJhaHcAGJGZ6oGa';
     
+            let lat = this.props.selectedRecord.lat;
+            let lon = this.props.selectedRecord.lon;
+            if(lat == null || lon == null){
+                lat = 11.166358;
+                lon = 77.16002;
+            }
+
+            // 'map' refers to a <div> element with the ID map
+            const map=window.L.mapquest.map('map', {
+            center: [lat, lon],
+            layers: window.L.mapquest.tileLayer('map'),
+            zoom: 12
+            });
+            window.L.mapquest.textMarker([lat, lon], {
+                text: 'Asset Location',
+                subtext: 'Your asset located here',
+                position: 'right',
+                type: 'marker',
+                icon: {
+                  primaryColor: '#333333',
+                  secondaryColor: '#333333',
+                  size: 'sm'
+                }
+              }).addTo(map);
+        }
+    }
+
     componentDidMount(){
-        this.props.retriveSelectedRecord(this.props.match.params.personId);
+        this.props.retriveSelectedRecord(this.props.match.params.personId);        
     }
 
     render(){
@@ -26,9 +62,7 @@ class Locate extends Component{
                             </div>
                             <div className="col-md-8">
                                 <div className="profile-head">
-                                    <h5>
-                                        {this.props.selectedRecord.name}
-                                    </h5>
+                                    <h5>{this.props.selectedRecord.name}</h5>
                                     <div className="row">
                                             <div className="col-md-6">
                                                 <label>Name</label>
@@ -61,6 +95,13 @@ class Locate extends Component{
                                                 <p>{this.props.selectedRecord.system_number}</p>
                                             </div>
                                         </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12" style={{display: 'flex',justifyContent: 'flex-end'}}>
+                                <div className="col-12 col-lg-6" id="map" style={{height: '400px',borderRadius: '8px',marginTop: '20px'}}>
+                                    <p style={{textAlign: 'center'}}>Map loading...</p>
                                 </div>
                             </div>
                         </div>

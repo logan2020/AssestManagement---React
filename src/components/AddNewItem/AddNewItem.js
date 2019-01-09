@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class AddNewItem extends Component{
     ImageStyles={
-        "width": "7%",
+        "width": "52px",
         "float": "right",
         "cursor": "pointer",
         "color": "white",
