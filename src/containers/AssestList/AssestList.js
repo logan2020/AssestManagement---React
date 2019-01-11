@@ -92,11 +92,11 @@ class AssestList extends Component{
                                 <td>
                                     <Avatar 
                                         alt={person.thumbnail}
-                                        src={thumb}/>
+                                        src={thumb}
+                                        onClick={()=>{this.changeRouteWithParam(person._id)}}/>
                                 </td>
                                 <td> {person.name} </td>
-                                <td
-                                    onClick={()=>{this.changeRouteWithParam(person._id)}}>
+                                <td>
                                     {person.sap_id}
                                 </td>
                                 <td> {person.email} </td>

@@ -11,6 +11,7 @@
 .profile_img img{
     width: 100%;
     height: 100%;
+    border-radius: 4px;
 }
 .profile_head h5{
     color: #333;
@@ -18,4 +19,12 @@
 
 .profile-tab label{
     font-weight: 600;
+}
+
+.paper{
+    padding: 16px;
+}
+
+.marginTop15{
+    margin-top: 15px;
 }

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 import styles from './Locate.module.css';
 
 import { retriveSelectedRecordToLocate } from "../../redux/actions/actions";
@@ -41,7 +44,6 @@ class Locate extends Component{
     }
 
     componentDidMount(){
-        console.log(this.props);
         this.props.retriveSelectedRecord(this.props.computedMatch.params.personId);        
     }
 
@@ -61,39 +63,59 @@ class Locate extends Component{
                             </div>
                             <div className="col-md-8">
                                 <div className={styles.profile_head}>
-                                    <h5>{this.props.selectedRecord.name}</h5>
-                                    <div className="row">
+                                    <Paper className={styles.paper} elevation={1}>
+                                        <Typography variant="h5" component="h3">
+                                            {this.props.selectedRecord.name}
+                                        </Typography>
+                                        <div className={`row ${styles.marginTop15}`}>
                                             <div className="col-md-6">
-                                                <label>Name</label>
+                                                <Typography component="label" align="left">
+                                                    Name
+                                                </Typography>
                                             </div>
                                             <div className="col-md-6">
-                                                <p>{this.props.selectedRecord.name}</p>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <p>{this.props.selectedRecord.email}</p>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <label>SAP ID</label>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <p>{this.props.selectedRecord.sap_id}</p>
+                                                <Typography component="p" align="left">
+                                                    {this.props.selectedRecord.name}
+                                                </Typography>
                                             </div>
                                         </div>
-                                        <div className="row">
+                                        <div className={`row ${styles.marginTop15}`}>
                                             <div className="col-md-6">
-                                                <label>System Number</label>
+                                                <Typography component="label" align="left">
+                                                    Email
+                                                </Typography>
                                             </div>
                                             <div className="col-md-6">
-                                                <p>{this.props.selectedRecord.system_number}</p>
+                                                <Typography component="p" align="left">
+                                                    {this.props.selectedRecord.email}
+                                                </Typography>
                                             </div>
                                         </div>
+                                        <div className={`row ${styles.marginTop15}`}>
+                                            <div className="col-md-6">
+                                                <Typography component="label" align="left">
+                                                    SAP_ID
+                                                </Typography>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <Typography component="p" align="left">
+                                                    {this.props.selectedRecord.sap_id}
+                                                </Typography>
+                                            </div>
+                                        </div>
+                                        <div className={`row ${styles.marginTop15}`}>
+                                            <div className="col-md-6">
+                                                <Typography component="label" align="left">
+                                                    System Number
+                                                </Typography>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <Typography component="p" align="left">
+                                                    {this.props.selectedRecord.system_number}
+                                                </Typography>
+                                            </div>
+                                        </div>
+                                    </Paper>
                                 </div>
                             </div>
                         </div>
